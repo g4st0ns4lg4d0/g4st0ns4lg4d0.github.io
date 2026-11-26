@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Aguinaldo - Registro Civil</title>
+    <style>
+        /* --- ESTILOS GENERALES Y RESET --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        /* --- BARRA SUPERIOR (Gobierno) --- */
+        .top-bar {
+            background-color: #333;
+            color: white;
+            padding: 5px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+        
+        .top-bar .left-icons span {
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        /* --- CABECERA PRINCIPAL --- */
+        header {
+            background-color: white;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Simulación del Logo con CSS para no depender de imágenes externas */
+        .logo-box {
+            display: flex;
+            height: 60px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .logo-blue {
+            background-color: #0055a5;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            text-align: center;
+            padding: 2px;
+        }
+        .logo-red {
+            background-color: #e30613;
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5px;
+            color: white;
+            font-size: 8px;
+            line-height: 1.1;
+        }
+        .logo-red strong { font-size: 10px; }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: #0055a5;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .contact-info img {
+            width: 20px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            background-color: white;
+            padding: 10px 50px;
+            display: flex;
+            gap: 30px;
+            border-bottom: 2px solid #eee;
+            font-size: 14px;
+            color: #666;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            padding-bottom: 5px;
+        }
+
+        nav a:hover {
+            color: #0055a5;
+            border-bottom: 2px solid #0055a5;
+        }
+
+        /* --- BANNER AZUL (Fondo del formulario) --- */
+        .banner-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decoración del banner (simulando los iconos de la imagen) */
+        .banner-decoration {
+            position: absolute;
+            left: 10%;
+            bottom: 10%;
+            opacity: 0.3;
+            font-size: 100px;
+            color: white;
+        }
+
+        /* --- FORMULARIO (Tarjeta Blanca) --- */
+        .form-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e30613;
+            padding-bottom: 15px;
+        }
+
+        .form-header h2 {
+            color: #1e3c72;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        .form-header p {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* --- CAMPOS DEL FORMULARIO --- */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+            font-size: 14px;
+        }
+
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus {
+            border-color: #0055a5;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 85, 165, 0.2);
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+        .row .form-group {
+            flex: 1;
+        }
+
+        /* --- BOTÓN ENVIAR --- */
+        .btn-submit {
+            background-color: #e30613; /* Rojo corporativo */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #b3050f;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            color: #e30613;
+            font-size: 12px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra Superior -->
+    <div class="top-bar">
+        <div class="left-icons">
+            <span>🔍 registrocivil.cl</span>
+        </div>
+        <div class="right-icons">
+            <span>Accesibilidad</span>
+        </div>
+    </div>
+
+    <!-- Cabecera -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-box">
+                <div class="logo-blue">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Escudo_de_Chile.svg/1200px-Escudo_de_Chile.svg.png" alt="Escudo" style="width: 25px; filter: brightness(0) invert(1);">
+                </div>
+                <div class="logo-red">
+                    <strong>Servicio de</strong><br>
+                    Registro Civil e<br>
+                    Identificación
+                </div>
+            </div>
+        </div>
+        <div class="contact-info">
+            <span>📞 600 370 2000</span>
+            <span>✉️ Contáctenos</span>
+            <div style="background:#0055a5; color:white; padding:5px 10px; border-radius:50%;">?</div>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Trámites</a>
+        <a href="#">Servicios en línea</a>
+        <a href="#">Nuestras Oficinas</a>
+        <a href="#">Preguntas Frecuentes</a>
+    </nav>
+
+    <!-- Sección Principal con Banner -->
+    <section class="banner-section">
+        
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Registro de Datos Bancarios</h2>
+                <p>Complete el formulario para recibir su Aguinaldo</p>
+            </div>
+
+            <form action="#" method="POST">
+                
+                <!-- Datos Personales -->
+                <div class="form-group">
+                    <label for="rut">RUT</label>
+                    <input type="text" id="rut" name="rut" placeholder="Ej: 12.345.678-9" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre y apellidos" required>
+                </div>
+
+                <!-- Datos Bancarios -->
+                <div class="form-group">
+                    <label for="banco">Seleccione su Banco</label>
+                    <select id="banco" name="banco" required>
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="BancoEstado">BancoEstado</option>
+                        <option value="Banco Falabella">Banco Falabella</option>
+                        <option value="Santander">Santander</option>
+                        <option value="Banco de Chile (Edwards Citi)">Banco de Chile (Edwards Citi)</option>
+                        <option value="Bci">Bci</option>
+                        <option value="Scotiabank">Scotiabank</option>
+                        <option value="Itaú">Itaú</option>
+                        <option value="Banco Ripley">Banco Ripley</option>
+                        <option value="Banco BICE">Banco BICE</option>
+                        <option value="Banco Security">Banco Security</option>
+                        <option value="Banco Consorcio">Banco Consorcio</option>
+                        <option value="Banco Internacional">Banco Internacional</option>
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label for="tipo_cuenta">Tipo de Cuenta</label>
+                        <select id="tipo_cuenta" name="tipo_cuenta" required>
+                            <option value="debito">Cuenta de Débito</option>
+                            <option value="corriente">Cuenta Corriente</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numero_cuenta">Número de Cuenta</label>
+                        <input type="number" id="numero_cuenta" name="numero_cuenta" placeholder="Ingrese número" required>
+                    </div>
+                </div>
+
+                <!-- Botón de Enviar -->
+                <button type="submit" class="btn-submit">Guardar y Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        Portal web optimizado para navegador Google Chrome
+    </footer>
+
+</body>
+</html>
